@@ -1,8 +1,7 @@
 module main(clk, in_selector, num1, num2, out_selector)	//4 different inputs: 2 different numbers, 
-													//and 1 input selecter bit for the input mux, 1 output selecter bit for the output mux
+//and 1 input selecter bit for the input mux, 1 output selecter bit for the output mux
 			
 	// Defining states for FSM
-	`define SWIDTH 2
 	`define S_off       2'b00
 	`define S_ready     2'b01
 	`define S_run       2'b10
@@ -27,6 +26,7 @@ module main(clk, in_selector, num1, num2, out_selector)	//4 different inputs: 2 
 	wire carryOutToNowhere;
 	wire [7:0] sum;
 	wire [7:0] diff;
+	reg error, next1, reg, load; //for the FSM?
 	
 	output outputVal;
 	
