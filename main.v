@@ -1,6 +1,13 @@
 module main(clk, in_selector, num1, num2, out_selector)	//4 different inputs: 2 different numbers, 
 													//and 1 input selecter bit for the input mux, 1 output selecter bit for the output mux
-													
+			
+	// Defining states for FSM
+	`define SWIDTH 2
+	`define S_off       2'b00
+	`define S_ready     2'b01
+	`define S_run       2'b10
+	`define S_run_error 2'b11
+	
 	input [2:0] in_selector; //persist, load, reset
 	input reg[7:0] num1;
 	input reg[7:0] num2;
