@@ -47,8 +47,8 @@ module Flash(clk, rst, in, out) ;
                 {outOverflow, outOverflow ? `S_run_error : `S_run } ;
       `S_run_error:   {error, next1} =
                       {outOverflow, `S_ready } ;
-      default:  {error, next1} =
-                {outOverflow, on ? `S_ready : `S_off } ;
+      //default:  {error, next1} =
+      //          {outOverflow, on ? `S_ready : `S_off } ;
     endcase
   end
 
