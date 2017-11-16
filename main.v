@@ -23,11 +23,11 @@ module main(clk, in_selector, num1, num2, out_selector)	//4 different inputs: 2 
 	
 	output outputVal;
 	
-	MuxFF #(8) ff_1(outputVal, num1, 8'b00000000, in_selector, outM1);
-	MuxFF #(8) ff_2(num2, num2, 8'b00000000, in_selector, outM2);
+	MuxFF #(8) mux_1(outputVal, num1, 8'b00000000, in_selector, outM1);
+	MuxFF #(8) mux_2(num2, num2, 8'b00000000, in_selector, outM2);
 	
-	DFF #(8) dff_1(clk, outM1, outDFF1);
-	DFF #(8) dff_2(clk, outM2, outDFF2);
+	DFF #(8) accumulator_dff(clk, outM1, outDFF1);
+	DFF #(8) input_dff(clk, outM2, outDFF2);
 	
 	ANDgate andGate(outDFF1, outDFF2, outAnd);
 	ORgate andGate(outDFF1, outDFF2, outOr);
