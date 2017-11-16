@@ -40,7 +40,18 @@ module main(clk, in_selector, num1, num2, out_selector)	//4 different inputs: 2 
 	
 	MuxOut(outAnd, outOr, outXor, outNot, add, sub, outMult, out_selector, outputVal);
 	
+	always @(*) begin
+		case(state)
+			`S_off:   {error, next1} = {outOverflow, on ? `S_ready : `S_off } ;
+			`S_ready: {error, next1} = {outOverflow, load ? `S_run : `S_ready } ;
+			`S_run:   {error, next1} = {outOverflow, outOverflow ? `S_run_error : `S_run } ;
+			`S_run_error:   {error, next1} = {outOverflow, `S_ready } ;
+			default:  {error, next1} = {outOverflow, on ? `S_ready : `S_off } ;
+    		endcase
+	end
 	
+	assign next = rst ? `S_ready : next1 ;
+
 	
 	
 endmodule
