@@ -38,7 +38,7 @@ module main(clk, in_selector, num1, num2, out_selector)	//4 different inputs: 2 
 	add myAdd(outDFF1, outDFF2, carryOutToNowhere, sum);
 	sub mySub(outDFF1, outDFF2, diff);
 	
-	MuxOut(outAnd, outOr, outXor, outNot, add, sub, outMult, out_selector, outputVal);
+	MuxOut output_mux(outAnd, outOr, outXor, outNot, add, sub, outMult, out_selector, outputVal);
 	
 	always @(*) begin
 		case(state)
