@@ -17,7 +17,7 @@ module TestBench;
     forever
       begin
 	   
-	      $display("    %b|    %b| %b|   %b|   %b|  %b|  %b|      %b|%b",num1, num2, out_sel, currState, out, nextState);
+	      $display("    %b|    %b|   %b|   %b|   %b|  %b",num1, num2, out_sel, currState, out, nextState);
         #5 clk = 1 ; 
 	
 		#5 clk = 0 ;
