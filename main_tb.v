@@ -17,8 +17,9 @@ module TestBench;
 		forever
 			begin
 				#5;
-				$display("    %b (%d)|    %b (%d)|   %b|   %b|   %b (%d)|  %b",final1, final1, final2, final2, out_sel, currState, out, out, nextState);
-				$display("    %b (%d)|    %b (%d)|   %b|   %b|   %b (%d)|  %b",final1, final1, final2, final2, out_sel, currState, out, out, nextState);
+				$display("    %b (%d)|    %b (%d)|   %b|",final1, final1, final2, final2, out_sel);
+				#5;
+				$display("    %b|   %b (%d)|  %b", currState, out, out, nextState);
 				$display("");
 				#5 clk = 1;
 				#5 clk = 0;
