@@ -4,14 +4,14 @@
 	`define S_run       2'b10
 	`define S_run_error 2'b11
 
-module main(clk, in_selector, num1, num2, out_selector, outputVal, state, next);	//4 different inputs: 2 different numbers, 
+module main(clk, rst, in_selector, num1, num2, out_selector, outputVal, state, next);	//4 different inputs: 2 different numbers, 
 //and 1 input selecter bit for the input mux. 3 outputs: value, current state, next state
 	
 	input wire [2:0] in_selector; //persist, load, reset
 	input [7:0] num1;
 	input [7:0] num2;
 	input [6:0] out_selector; //and, or, not, xor, add, sub, mult
-	input clk;
+	input clk, rst;
 	output [7:0] outputVal;
 	output wire [1:0] state, next;
 	wire [7:0] outM1;
