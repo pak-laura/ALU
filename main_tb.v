@@ -2,7 +2,7 @@ module TestBench;
 
 	reg clk, on, rst;
 	reg [2:0] in_sel;	//persist, load, reset
-	reg [5:0] out_sel;	//which operation to do, comes out of the last mux
+	reg [6:0] out_sel;	//which operation to do, comes out of the last mux
 	reg [7:0] num1, num2;
 	wire [7:0] out; //output value
 	wire [1:0] currState, nextState;
