@@ -52,6 +52,17 @@ module main(clk, on, rst, in_selector, num1, num2, final1, final2, out_selector,
 	
 	always @(*) begin
 		case(state)
+			`S_off:   {next1} = {on ? `S_ready : `S_off } ;
+				
+			`S_ready: {next1} = {load ? `S_run : `S_ready } ;
+			`S_run:   {next1} = {outOverflow ? `S_run_error : `S_run } ;
+			`S_run_error:   {next1} = {`S_ready } ;
+			default:  {next1} = {on ? `S_ready : `S_off } ;
+    		endcase
+	end
+	
+	/*always @(*) begin
+		case(state)
 			`S_off:   {error, next1} = {outOverflow, on ? `S_ready : `S_off } ;
 				
 			`S_ready: {error, next1} = {outOverflow, load ? `S_run : `S_ready } ;
@@ -59,9 +70,9 @@ module main(clk, on, rst, in_selector, num1, num2, final1, final2, out_selector,
 			`S_run_error:   {error, next1} = {outOverflow, `S_ready } ;
 			default:  {error, next1} = {outOverflow, on ? `S_ready : `S_off } ;
     		endcase
-	end
+	end*/
 	
-	//assign state = {error, next1};
+	//assign state = next1;
 	assign next = rst ? `S_ready : next1 ;
 
 	
