@@ -1,11 +1,11 @@
-module main(clk, in_selector, num1, num2, out_selector, outputVal, state, next)	//4 different inputs: 2 different numbers, 
-//and 1 input selecter bit for the input mux. 3 outputs: value, current state, next state
-			
-	// Defining states for FSM
+// Defining states for FSM
 	`define S_off       2'b00
 	`define S_ready     2'b01
 	`define S_run       2'b10
 	`define S_run_error 2'b11
+
+module main(clk, in_selector, num1, num2, out_selector, outputVal, state, next)	//4 different inputs: 2 different numbers, 
+//and 1 input selecter bit for the input mux. 3 outputs: value, current state, next state
 	
 	input wire [2:0] in_selector; //persist, load, reset
 	input reg[7:0] num1;
