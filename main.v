@@ -31,7 +31,7 @@ module main(clk, on, rst, in_selector, num1, num2, final1, final2, out_selector,
   	reg  [1:0] next1  ;      // next state without reset
 	
 	assign final1 = rst ? 8'b00000000 : num1;
-	final2 = rst ? 8'b00000000 : num2;
+	assign final2 = rst ? 8'b00000000 : num2;
 	
 	MuxFF #(8) mux_1(outputVal, final1, 8'b00000000, in_selector, outM1);
 	MuxFF #(8) mux_2(num2, final2, 8'b00000000, in_selector, outM2);
