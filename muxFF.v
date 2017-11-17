@@ -3,7 +3,7 @@ module MuxFF(keep_val, load, clear, sel, outWire);
 	input [k-1:0] keep_val, load, clear; //inputs
 	input [2:0] sel; //1-hot select
 	output [k-1:0] outWire;
-	wire [k-1:0] outWire = ({k{s[0]}} & keep_val) |
-													({k{s[1]}} & load) |
-													({k{s[2]}} & clear);
+	wire [k-1:0] outWire = ({k{sel[0]}} & keep_val) |
+				({k{sel[1]}} & load) |
+				({k{sel[2]}} & clear);
 endmodule
