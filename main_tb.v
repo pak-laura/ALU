@@ -18,23 +18,20 @@ module TestBench;
 			begin
 				#5;
 				$display("    %b (%d)|    %b (%d)|   %b|    %b|   %b (%d)|  %b",final1, final1, final2, final2, out_sel, currState, out, out, nextState);
-				#5 clk = 1;
+				#10 clk = 1;
 				#5 clk = 0;
 			end
 		end
 		
 		initial begin
-			rst=0; 
-			#5;
-			on = 1'b1; in_sel = 3'b010; num1 = 8'b01010111; num2 = 8'b00011010; out_sel = 7'b1000000;
-		
-			#10;
+			rst=0; on = 1'b1; in_sel = 3'b010; num1 = 8'b01010111; num2 = 8'b00011010; out_sel = 7'b1000000;
+			#20;
 			rst =1;
-			#30;
+			#20;
 			rst = 0;
 			on = 1'b1; in_sel = 3'b010; num1 = 8'b00000010; num2 = 8'b00000100; out_sel = 7'b1000000;
-			#5;
-			#42;
+			#20;
+			#40;
 			/*#15 on = 1'b1; in_sel = 3'b010; num1 = 8'b00000111; num2 = 8'b00000010; out_sel = 7'b1000000;
 			#15 on = 1'b1; in_sel = 3'b010; num1 = 8'b01010111; num2 = 8'b00011010; out_sel = 7'b0100000;
 			#15 on = 1'b1; in_sel = 3'b010; num1 = 8'b01010111; num2 = 8'b00011010; out_sel = 7'b0010000;
