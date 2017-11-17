@@ -51,7 +51,7 @@ module main(clk, on, rst, in_selector, num1, num2, final1, final2, out_selector,
 	MuxOut output_mux(outAnd, outOr, outXor, outNot, sum, diff, outMult, out_selector, outputVal);
 	
 	assign state = next;
-	load = in_selector[1] ? 1 : 0; //010
+	load = in_selector ? 1 : 0; //010
 	
 	always @(*) begin
 		case(state)
