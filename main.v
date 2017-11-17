@@ -13,6 +13,7 @@ module main(clk, in_selector, num1, num2, out_selector, outputVal, state, next);
 	input [6:0] out_selector; //and, or, not, xor, add, sub, mult
 	input clk;
 	output outputVal;
+	output wire [1:0] state, next;
 	wire [7:0] outputVal;
 	wire [7:0] outM1;
 	wire [7:0] outM2;
