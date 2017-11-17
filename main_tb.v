@@ -16,22 +16,23 @@ module TestBench;
 	    $display("-----------------------------------+----------+-----");
     forever
       begin
-	   
 	      $display("    %b|    %b|   %b|   %b|   %b|  %b",num1, num2, out_sel, currState, out, nextState);
-        #5 clk = 1 ; 
-	
+        	
+	      	#5 clk = 1 ;
 		#5 clk = 0 ;
       end
     end
-	
+	initial begin
 		in_sel = 3'b010; num1 = 8'b01010111; num2 = 8'b00011010;
 		//in_sel is selector for mux1/mux2
 		//not sure what this is used for	#0
 			
 			#100
+		in_sel = 3'b000; num1 = 8'b00000000; num2 = 8'b00000001;
 		
 		
-
+	
 	end
+		     end
 	
 endmodule
