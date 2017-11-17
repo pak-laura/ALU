@@ -4,10 +4,10 @@ module TestBench;
 	reg [2:0] in_sel;	//persist, load, reset
 	reg [6:0] out_sel;	//which operation to do, comes out of the last mux
 	reg [7:0] num1, num2;
-	wire [7:0] out; //output value
+	wire [7:0] out, final1, final2; //output value
 	wire [1:0] currState, nextState;
 
-	main myMain(clk, on, rst, in_sel, num1, num2, out_sel, out, currState, nextState);
+	main myMain(clk, on, rst, in_sel, num1, num2, final1, final2, out_sel, out, currState, nextState);
 
 	initial begin
 		clk = 1; #5 clk = 0;
@@ -17,7 +17,7 @@ module TestBench;
 		forever
 			begin
 				#5;
-				$display("    %b (%d)|    %b (%d)|   %b|   %b|   %b (%d)|  %b",num1, num1, num2, num2, out_sel, currState, out, out, nextState);
+				$display("    %b (%d)|    %b (%d)|   %b|   %b|   %b (%d)|  %b",final1, final1, final2, final2, out_sel, currState, out, out, nextState);
 				#5 clk = 1;
 				#5 clk = 0;
 			end
