@@ -1,5 +1,5 @@
-module main(clk, in_selector, num1, num2, out_selector, outputVal, outState)	//4 different inputs: 2 different numbers, 
-//and 1 input selecter bit for the input mux, 1 output selecter bit for the output mux
+module main(clk, in_selector, num1, num2, out_selector, outputVal, state, next)	//4 different inputs: 2 different numbers, 
+//and 1 input selecter bit for the input mux. 3 outputs: value, current state, next state
 			
 	// Defining states for FSM
 	`define S_off       2'b00
@@ -28,7 +28,6 @@ module main(clk, in_selector, num1, num2, out_selector, outputVal, outState)	//4
 	wire [7:0] diff;
 	reg error, load; //for the FSM?
 	wire [1:0] state, next ; // current state
-	wire [1:0] outState;
   	reg  [1:0] next1  ;      // next state without reset
 	
 	output outputVal;
@@ -53,6 +52,7 @@ module main(clk, in_selector, num1, num2, out_selector, outputVal, outState)	//4
 	always @(*) begin
 		case(state)
 			`S_off:   {error, next1} = {outOverflow, on ? `S_ready : `S_off } ;
+				
 			`S_ready: {error, next1} = {outOverflow, load ? `S_run : `S_ready } ;
 			`S_run:   {error, next1} = {outOverflow, outOverflow ? `S_run_error : `S_run } ;
 			`S_run_error:   {error, next1} = {outOverflow, `S_ready } ;
