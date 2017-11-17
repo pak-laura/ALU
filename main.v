@@ -7,7 +7,7 @@ module main(clk, in_selector, num1, num2, out_selector, outputVal, state, next)	
 	`define S_run       2'b10
 	`define S_run_error 2'b11
 	
-	input [2:0] in_selector; //persist, load, reset
+	input wire [2:0] in_selector; //persist, load, reset
 	input reg[7:0] num1;
 	input reg[7:0] num2;
 	input [6:0] out_selector; //and, or, not, xor, add, sub, mult
