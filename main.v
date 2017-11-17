@@ -12,6 +12,7 @@ module main(clk, in_selector, num1, num2, out_selector, outputVal, state, next);
 	input reg[7:0] num2;
 	input [6:0] out_selector; //and, or, not, xor, add, sub, mult
 	input clk;
+	output outputVal;
 	wire [7:0] outputVal;
 	wire [7:0] outM1;
 	wire [7:0] outM2;
@@ -29,8 +30,6 @@ module main(clk, in_selector, num1, num2, out_selector, outputVal, state, next);
 	reg error, load; //for the FSM?
 	wire [1:0] state, next ; // current state
   	reg  [1:0] next1  ;      // next state without reset
-	
-	output outputVal;
 	
 	MuxFF #(8) mux_1(outputVal, num1, 8'b00000000, in_selector, outM1);
 	MuxFF #(8) mux_2(num2, num2, 8'b00000000, in_selector, outM2);
