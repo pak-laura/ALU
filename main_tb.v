@@ -23,12 +23,12 @@ module TestBench;
       end
     end
 	initial begin
-		in_sel = 3'b010; num1 = 8'b01010111; num2 = 8'b00011010;
+		on = 1'b1; in_sel = 3'b010; num1 = 8'b01010111; num2 = 8'b00011010; out_sel = 7'b001000;
 		//in_sel is selector for mux1/mux2
 		//not sure what this is used for	#0
 			
 			#100
-		in_sel = 3'b000; num1 = 8'b00000000; num2 = 8'b00000001;
+		on = 1'b1; in_sel = 3'b000; num1 = 8'b00000000; num2 = 8'b00000001; out_sel = 7'b000010;
 		
 		
 	
