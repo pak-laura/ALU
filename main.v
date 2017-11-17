@@ -13,8 +13,7 @@ module main(clk, on, rst, in_selector, num1, num2, final1, final2, out_selector,
 	input [6:0] out_selector; //and, or, not, xor, add, sub, mult
 	input clk, rst, on;
 	output [7:0] outputVal, final1, final2;
-	output reg [1:0] state, next;
-	wire [1:0] state, next;
+	output [1:0] state, next;
 	wire [7:0] outM1;
 	wire [7:0] outM2;
 	wire [7:0] outDFF1;
@@ -52,7 +51,6 @@ module main(clk, on, rst, in_selector, num1, num2, final1, final2, out_selector,
 	MuxOut output_mux(outAnd, outOr, outXor, outNot, sum, diff, outMult, out_selector, outputVal);
 	
 	always @(*) begin
-		state = {error, next1};
 		case(state)
 			`S_off:   {error, next1} = {outOverflow, on ? `S_ready : `S_off } ;
 				
@@ -63,6 +61,7 @@ module main(clk, on, rst, in_selector, num1, num2, final1, final2, out_selector,
     		endcase
 	end
 	
+	assign state = {error, next1};
 	assign next = rst ? `S_ready : next1 ;
 
 	
