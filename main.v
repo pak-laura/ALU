@@ -38,9 +38,9 @@ module main(clk, in_selector, num1, num2, out_selector, outputVal, state, next);
 	DFF #(8) input_dff(clk, outM2, outDFF2);
 	
 	ANDgate andGate(outDFF1, outDFF2, outAnd);
-	ORgate andGate(outDFF1, outDFF2, outOr);
-	NOTgate andGate(outDFF1, outNot);
-	XORgate andGate(outDFF1, outDFF2, outXor);
+	ORgate orGate(outDFF1, outDFF2, outOr);
+	NOTgate notGate(outDFF1, outNot);
+	XORgate xorGate(outDFF1, outDFF2, outXor);
 	
 	Mult multed(outDFF1, outDFF2, outOverflow, outMult);
 	add myAdd(outDFF1, outDFF2, carryOutToNowhere, sum);
