@@ -30,6 +30,9 @@ module main(clk, on, rst, in_selector, num1, num2, out_selector, outputVal, stat
 	reg error, load; //for the FSM?
   	reg  [1:0] next1  ;      // next state without reset
 	
+	num1 = rst ? 8'b00000000 : num1;
+	num2 = rst ? 8'b00000000 : num2;
+	
 	MuxFF #(8) mux_1(outputVal, num1, 8'b00000000, in_selector, outM1);
 	MuxFF #(8) mux_2(num2, num2, 8'b00000000, in_selector, outM2);
 	
