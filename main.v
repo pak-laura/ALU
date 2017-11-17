@@ -61,7 +61,7 @@ module main(clk, on, rst, in_selector, num1, num2, final1, final2, out_selector,
     		endcase
 	end
 	
-	assign state = {error, next1};
+	//assign state = {error, next1};
 	assign next = rst ? `S_ready : next1 ;
 
 	
