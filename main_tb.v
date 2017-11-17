@@ -31,6 +31,8 @@ module TestBench;
 			#10;
 			rst =1;
 			#30;
+			rst = 0;
+			#30;
 			on = 1'b1; in_sel = 3'b010; num1 = 8'b00000010; num2 = 8'b00000100; out_sel = 7'b1000000;
 			#5;
 			#42;
