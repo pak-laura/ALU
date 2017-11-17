@@ -4,12 +4,12 @@ module MuxOut(logAnd, logOr, logXor, logNot, add, sub, mult, sel, outWire);
 	input [k-1:0] logAnd, logOr, logXor, logNot, add, sub, mult; //inputs
 	input [5:0] sel; //1-hot select
 	output[k-1:0] outWire;
-	wire [k-1:0] outWire = ({k{s[0]}} & logAnd) |
-				({k{s[1]}} & logOr) |
-				({k{s[2]}} & logXor) |
-				({k{s[3]}} & logNot) |
-				({k{s[4]}} & add) |
-				({k{s[5]}} & sub) |
-				({k{s[6]}} & mult);
+	wire [k-1:0] outWire = ({k{sel[0]}} & logAnd) |
+				({k{sel[1]}} & logOr) |
+				({k{sel[2]}} & logXor) |
+				({k{sel[3]}} & logNot) |
+				({k{sel[4]}} & add) |
+				({k{sel[5]}} & sub) |
+				({k{sel[6]}} & mult);
 endmodule
 									
