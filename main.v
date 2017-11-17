@@ -56,7 +56,7 @@ module main(clk, on, rst, in_selector, num1, num2, final1, final2, out_selector,
 		case(in_selector)
 			100: load = 0;
 			010: load = 1;
-			001: load = 1;
+			001: load = 0;
 		endcase
 		case(state)
 			`S_off:   {next1} = {on ? `S_ready : `S_off } ;
