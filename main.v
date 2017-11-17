@@ -50,6 +50,8 @@ module main(clk, on, rst, in_selector, num1, num2, final1, final2, out_selector,
 	
 	MuxOut output_mux(outAnd, outOr, outXor, outNot, sum, diff, outMult, out_selector, outputVal);
 	
+	assign state = next;
+	
 	always @(*) begin
 		case(state)
 			`S_off:   {next1} = {on ? `S_ready : `S_off } ;
@@ -57,7 +59,7 @@ module main(clk, on, rst, in_selector, num1, num2, final1, final2, out_selector,
 			`S_ready: {next1} = {load ? `S_run : `S_ready } ;
 			`S_run:   {next1} = {outOverflow ? `S_run_error : `S_run } ;
 			`S_run_error:   {next1} = {`S_ready } ;
-			default:  {next1} = {on ? `S_ready : `S_off } ;
+			//default:  {next1} = {on ? `S_ready : `S_off } ;
     		endcase
 	end
 	
@@ -72,7 +74,7 @@ module main(clk, on, rst, in_selector, num1, num2, final1, final2, out_selector,
     		endcase
 	end*/
 	
-	assign state = next1;
+	
 	assign next = rst ? `S_ready : next1 ;
 
 	
