@@ -10,10 +10,25 @@ module TestBench;
 	main myMain(clk, on, rst, in_sel, num1, num2, out_sel, out, currState, nextState);
 
 	initial begin
-	
-    clk = 1 ; #5 clk = 0 ;
-		$display("Num1|Num2|Operation|Current|Output|Next State");		
-	    $display("-----------------------------------+----------+-----");
+		clk = 1; #5 clk = 0;
+			$display("Num1|Num2|Operation|Current|Output|Next State");
+		$display("-----------------------------------+----------+-----");
+		
+		forever
+			begin
+				#5 clk = 0;
+				$display("    %b|    %b|   %b|   %b|   %b|  %b",num1, num2, out_sel, currState, out, nextState);
+				#5 clk = 1;
+			end
+		
+		initial begin
+			#5 on = 1'b1; in_sel = 3'b010; num1 = 8'b01010111; num2 = 8'b00011010; out_sel = 7'b001000;
+			#10 on = 1'b1; in_sel = 3'b000; num1 = 8'b00000000; num2 = 8'b00000001; out_sel = 7'b000010;
+			$stop;
+		end
+	end
+endmodule
+/*	
     forever
       begin
 	      $display("    %b|    %b|   %b|   %b|   %b|  %b",num1, num2, out_sel, currState, out, nextState);
@@ -33,6 +48,6 @@ module TestBench;
 		
 	
 	end
-
 	
 endmodule
+*/
