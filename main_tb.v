@@ -11,7 +11,7 @@ module TestBench;
 
 	initial begin
 		clk = 1; #5 clk = 0;
-			$display("Num1|Num2|Operation|Current|Output|Next State");
+		$display("Num1|Num2|Operation|Current State|Output|Next State");
 		$display("-----------------------------------+----------+-----");
 		
 		forever
@@ -20,10 +20,12 @@ module TestBench;
 				$display("    %b|    %b|   %b|   %b|   %b|  %b",num1, num2, out_sel, currState, out, nextState);
 				#5 clk = 1;
 			end
+		end
 		
 		begin
 			#5 on = 1'b1; in_sel = 3'b010; num1 = 8'b01010111; num2 = 8'b00011010; out_sel = 7'b001000;
 			#10 on = 1'b1; in_sel = 3'b000; num1 = 8'b00000000; num2 = 8'b00000001; out_sel = 7'b000010;
+			#10
 			$stop;
 		end
 	end
