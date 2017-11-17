@@ -7,7 +7,7 @@ module TestBench;
 	wire [7:0] out; //output value
 	wire [1:0] currState, nextState;
 
-	main myMain(in_sel, num1, num2, out_sel, out, currState, nextState);
+	main myMain(clk, in_sel, num1, num2, out_sel, out, currState, nextState);
 
 	initial begin
 	
