@@ -14,7 +14,7 @@ module main(clk, on, rst, in_selector, num1, num2, final1, final2, out_selector,
 	input clk, rst, on;
 	output [7:0] outputVal, final1, final2;
 	output reg [1:0] state, next;
-	output [1:0] state, next;
+	wire [1:0] state, next;
 	wire [7:0] outM1;
 	wire [7:0] outM2;
 	wire [7:0] outDFF1;
