@@ -2,7 +2,7 @@ module Mult(first, second, errorWire, outWire);
 	input [7:0] first, second;
 	output [7:0] outWire;
 	output errorWire;
-	wire[7:0] outWire;
+
 
 	//partial products
 	wire [7:0] pp0 = first & {8{second[0]}}; //x1
@@ -26,7 +26,7 @@ module Mult(first, second, errorWire, outWire);
 	FAdder #(8) fa2(pp7, {addOut6,sum6[7:1]}, 1'b0, addOut7, sum7);
 
 	//result
-	outWire = {sum7[0], sum6[0], sum5[0], sum4[0], sum3[0], sum2[0],sum1[0], pp0[0]};
-	errorWire = {addOut7, sum7[7:1]} ? 1:0;
+	wire[7:0] outWire = {sum7[0], sum6[0], sum5[0], sum4[0], sum3[0], sum2[0],sum1[0], pp0[0]};
+	wire [7:0] errorWire = {addOut7, sum7[7:1]} ? 1:0;
 	//wire [15:0] outWire = {addOut7, sum7, sum6[0], sum5[0], sum4[0], sum3[0], sum2[0],sum1[0],pp0[0]};
 endmodule
