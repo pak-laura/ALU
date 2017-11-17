@@ -25,7 +25,9 @@ module TestBench;
 		
 		initial begin
 			rst=0; 
+			#5
 			on = 1'b1; in_sel = 3'b010; num1 = 8'b01010111; num2 = 8'b00011010; out_sel = 7'b1000000;
+			#5
 			rst =1;
 			on = 1'b1; in_sel = 3'b010; num1 = 8'b01010111; num2 = 8'b00011010; out_sel = 7'b1000000;
 			/*#15 on = 1'b1; in_sel = 3'b010; num1 = 8'b00000111; num2 = 8'b00000010; out_sel = 7'b1000000;
