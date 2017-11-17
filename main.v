@@ -29,7 +29,6 @@ module main(clk, in_selector, num1, num2, out_selector, outputVal, state, next);
 	wire [7:0] sum;
 	wire [7:0] diff;
 	reg error, load; //for the FSM?
-	wire [1:0] state, next ; // current state
   	reg  [1:0] next1  ;      // next state without reset
 	
 	MuxFF #(8) mux_1(outputVal, num1, 8'b00000000, in_selector, outM1);
