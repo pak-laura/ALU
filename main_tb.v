@@ -16,18 +16,19 @@ module TestBench;
 		
 		forever
 			begin
-				#5 clk = 0;
 				$display("    %b|    %b|   %b|   %b|   %b|  %b",num1, num2, out_sel, currState, out, nextState);
 				#5 clk = 1;
+				#5 clk = 0;
 			end
 		end
 		
-		begin
-			#5 on = 1'b1; in_sel = 3'b010; num1 = 8'b01010111; num2 = 8'b00011010; out_sel = 7'b001000;
+		initial begin
+			rst=0; on = 1'b1; in_sel = 3'b010; num1 = 8'b01010111; num2 = 8'b00011010; out_sel = 7'b001000;
+			#10 on = 1'b1; in_sel = 3'b010; num1 = 8'b01010111; num2 = 8'b00011010; out_sel = 7'b001000;
 			#10 on = 1'b1; in_sel = 3'b000; num1 = 8'b00000000; num2 = 8'b00000001; out_sel = 7'b000010;
 			#10
 			$stop;
-		end
+		
 	end
 endmodule
 /*	
