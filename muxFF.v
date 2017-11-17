@@ -1,5 +1,5 @@
 module MuxFF(keep_val, load, clear, sel, outWire);
-	parameter k= 3; //# of inputs, can override in instantiation
+	parameter k= 8; //# of inputs, can override in instantiation
 	input [k-1:0] keep_val, load, clear; //inputs
 	input [2:0] sel; //1-hot select
 	output [k-1:0] outWire;
