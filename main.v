@@ -1,4 +1,4 @@
-module main(clk, in_selector, num1, num2, out_selector, outputVal)	//4 different inputs: 2 different numbers, 
+module main(clk, in_selector, num1, num2, out_selector, outputVal, outState)	//4 different inputs: 2 different numbers, 
 //and 1 input selecter bit for the input mux, 1 output selecter bit for the output mux
 			
 	// Defining states for FSM
@@ -28,6 +28,7 @@ module main(clk, in_selector, num1, num2, out_selector, outputVal)	//4 different
 	wire [7:0] diff;
 	reg error, load; //for the FSM?
 	wire [1:0] state, next ; // current state
+	wire [1:0] outState;
   	reg  [1:0] next1  ;      // next state without reset
 	
 	output outputVal;
