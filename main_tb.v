@@ -12,7 +12,7 @@ module TestBench;
 	initial begin
 	
     clk = 1 ; #5 clk = 0 ;
-	    $display("Num1|Num2|Operation|Current|Output|Next State);		
+		$display("Num1|Num2|Operation|Current|Output|Next State");		
 	    $display("-----------------------------------+----------+-----");
     forever
       begin
