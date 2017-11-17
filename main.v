@@ -8,8 +8,8 @@ module main(clk, in_selector, num1, num2, out_selector, outputVal, state, next);
 //and 1 input selecter bit for the input mux. 3 outputs: value, current state, next state
 	
 	input wire [2:0] in_selector; //persist, load, reset
-	input reg[7:0] num1;
-	input reg[7:0] num2;
+	input [7:0] num1;
+	input [7:0] num2;
 	input [6:0] out_selector; //and, or, not, xor, add, sub, mult
 	input clk;
 	output outputVal;
