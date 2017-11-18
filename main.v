@@ -12,10 +12,10 @@ module main(clk, on, /*rst,*/ in_selector, num1, num2, /*final1, final2,*/outM1,
 	input [7:0] num2;
 	input [6:0] out_selector; //and, or, not, xor, add, sub, mult
 	input clk, /*rst,*/ on;
-	output [7:0] outputVal, final1, final2;
+	output [7:0] outputVal, outM1, outM2;//, final1, final2;
 	output [1:0] state, next;
-	wire [7:0] outM1;
-	wire [7:0] outM2;
+	//wire [7:0] outM1;
+	//wire [7:0] outM2;
 	wire [7:0] outDFF1;
 	wire [7:0] outDFF2;
 	wire [7:0] outAnd;
