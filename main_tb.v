@@ -7,7 +7,7 @@ module TestBench;
 	wire [7:0] out, final1, final2; //output value
 	wire [1:0] currState, nextState;
 
-	main myMain(clk, on, rst, in_sel, num1, num2, final1, final2, out_sel, out, currState, nextState);
+	main myMain(clk, on, /*rst,*/ in_sel, num1, num2, final1, final2, out_sel, out, currState, nextState);
 
 	initial begin
 		clk = 1; #5 clk = 0;
@@ -25,11 +25,11 @@ module TestBench;
 		
 		initial begin
 			#20;
-			rst=0; on = 1'b1; in_sel = 3'b010; num1 = 8'b01010111; num2 = 8'b00011010; out_sel = 7'b1000000;
+			/*rst=0;*/ on = 1'b1; in_sel = 3'b010; num1 = 8'b01010111; num2 = 8'b00011010; out_sel = 7'b1000000;
 			#20;
-			rst =1;
+			/*rst =1;*/ on = 1'b1; in_sel = 3'b001; num1 = 8'b01010111; num2 = 8'b00011010; out_sel = 7'b1000000;
 			#20;
-			rst = 0; on = 1'b1; in_sel = 3'b010; num1 = 8'b00000010; num2 = 8'b00000100; out_sel = 7'b1000000;
+			/*rst = 0;*/ on = 1'b1; in_sel = 3'b010; num1 = 8'b00000010; num2 = 8'b00000100; out_sel = 7'b1000000;
 			#10 on = 1'b1; in_sel = 3'b010; num1 = 8'b00000010; num2 = 8'b00000100; out_sel = 7'b1000000;
 			#10;
 			#10 on = 1'b1; in_sel = 3'b010; num1 = 8'b00000010; num2 = 8'b00000100; out_sel = 7'b1000000;
@@ -49,26 +49,4 @@ module TestBench;
 		
 	end
 endmodule
-/*	
-    forever
-      begin
-	      $display("    %b|    %b|   %b|   %b|   %b|  %b",num1, num2, out_sel, currState, out, nextState);
-        	
-	      	#5 clk = 1 ;
-		#5 clk = 0 ;
-      end
-    end
-	initial begin
-		on = 1'b1; in_sel = 3'b010; num1 = 8'b01010111; num2 = 8'b00011010; out_sel = 7'b001000;
-		//in_sel is selector for mux1/mux2
-		//not sure what this is used for	#0
-			
-			#100
-		on = 1'b1; in_sel = 3'b000; num1 = 8'b00000000; num2 = 8'b00000001; out_sel = 7'b000010;
-		
-		
-	
-	end
-	
-endmodule
-*/
+
