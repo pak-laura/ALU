@@ -4,14 +4,14 @@
 	`define S_run       2'b10
 	`define S_run_error 2'b11
 
-module main(clk, on, rst, in_selector, num1, num2, final1, final2, out_selector, outputVal, state, next);	//5 inputs: 2 different numbers, 
+module main(clk, on, /*rst,*/ in_selector, num1, num2, /*final1, final2,*/outM1, outM2, out_selector, outputVal, state, next);	//5 inputs: 2 different numbers, 
 //1 input selecter bit for the input mux, clock, and a 1 bit on/off indicator. 3 outputs: value, current state, next state
 	
 	input wire [2:0] in_selector; //persist, load, reset
 	input [7:0] num1;
 	input [7:0] num2;
 	input [6:0] out_selector; //and, or, not, xor, add, sub, mult
-	input clk, rst, on;
+	input clk, /*rst,*/ on;
 	output [7:0] outputVal, final1, final2;
 	output [1:0] state, next;
 	wire [7:0] outM1;
@@ -24,17 +24,17 @@ module main(clk, on, rst, in_selector, num1, num2, final1, final2, out_selector,
 	wire [7:0] outXor;
 	wire [7:0] outMult;
 	wire outOverflow;
-	wire carryOutToNowhere;
+	wire carryOutToNowhere, rst; //put rst here
 	wire [7:0] sum;
 	wire [7:0] diff;
 	reg error, load; //for the FSM?
   	reg  [1:0] next1  ;      // next state without reset
 	
-	assign final1 = rst ? 8'b00000000 : num1;
-	assign final2 = rst ? 8'b00000000 : num2;
+	/*assign final1 = rst ? 8'b00000000 : num1;
+	assign final2 = rst ? 8'b00000000 : num2;*/
 	
-	MuxFF #(8) mux_1(outputVal, final1, 8'b00000000, in_selector, outM1);
-	MuxFF #(8) mux_2(num2, final2, 8'b00000000, in_selector, outM2);
+	MuxFF #(8) mux_1(outputVal, num1, 8'b00000000, in_selector, outM1); //changed from 2nd final to num
+	MuxFF #(8) mux_2(num2, num2, 8'b00000000, in_selector, outM2);
 	
 	DFF #(8) accumulator_dff(clk, outM1, outDFF1);
 	DFF #(8) input_dff(clk, outM2, outDFF2);
@@ -54,9 +54,9 @@ module main(clk, on, rst, in_selector, num1, num2, final1, final2, out_selector,
 	
 	always @(*) begin
 		case(in_selector)
-			100: load = 0;
-			010: load = 1;
-			001: load = 0;
+			100: load = 0; rst = 0;
+			010: load = 1; rst = 0;
+			001: load = 0; rst = 1;
 		endcase
 		case(state)
 			`S_off:   {next1} = {on ? `S_ready : `S_off } ;
