@@ -54,9 +54,9 @@ module main(clk, on, /*rst,*/ in_selector, num1, num2, /*final1, final2,*/outM1,
 	
 	always @(*) begin
 		case(in_selector)
-			100: load = 0; rst = 0;
-			010: load = 1; rst = 0;
-			001: load = 0; rst = 1;
+			3'b100: load = 1'b0; rst = 1'b0;
+			3'b010: load = 1'b1; rst = 1'b0;
+			3'b001: load = 1'b0; rst = 1'b1;
 		endcase
 		case(state)
 			`S_off:   {next1} = {on ? `S_ready : `S_off } ;
