@@ -42,7 +42,7 @@ module TestBench;
 				end
 		*/		
 
-				casex (out_sel, currState, nextState)
+				casex ({out_sel, currState, nextState})
 				11'b10000000000 : $display("    %b (%d)|    %b (%d)|   %b(Mult)|    	 %b(Off)|	   %b (%d)| 	 %b(Off)",final1, final1, final2, final2, out_sel, currState, out, out, nextState);
 				11'b10000000001 : $display("    %b (%d)|    %b (%d)|   %b(Mult)|    	 %b(Off)|	   %b (%d)| 	 %b(Ready)",final1, final1, final2, final2, out_sel, currState, out, out, nextState);
 				11'b10000000100 : $display("    %b (%d)|    %b (%d)|   %b(Mult)|    	 %b(Ready)|	   %b (%d)| 	 %b(Off)",final1, final1, final2, final2, out_sel, currState, out, out, nextState);
