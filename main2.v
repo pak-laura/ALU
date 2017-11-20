@@ -25,15 +25,13 @@ module main(clk, on, /*rst,*/ in_selector, num1, num2, /*final1, final2,*/outM1,
 	wire [7:0] outXor;
 	wire [7:0] outMult;
 	wire outOverflow;
-	wire carryOutToNowhere, rst; //put rst here
+	wire carryOutToNowhere; 
 	wire [7:0] sum;
 	wire [7:0] diff;
-	reg load; //for the FSM?
-  	reg  [1:0] next1  ;      // next state without reset
+ 	reg  [1:0] next1  ;      // next state without reset
+	reg [1:0] x; //for reset
 	
-	/*assign final1 = rst ? 8'b00000000 : num1;
-	assign final2 = rst ? 8'b00000000 : num2;*/
-	
+
 	MuxFF #(8) mux_1(outputVal, num1, 8'b00000000, in_selector, outM1); //changed from 2nd final to num
 	MuxFF #(8) mux_2(num2, num2, 8'b00000000, in_selector, outM2);
 	
@@ -53,19 +51,25 @@ module main(clk, on, /*rst,*/ in_selector, num1, num2, /*final1, final2,*/outM1,
 	
 	DFF #(2) state_reg(clk, next, state); //reg for state
 	
+
 	always @(*) begin
-		casex({on, load, outOverflow,state})
-			{3'b0xx,`S_off}:   next1 = `S_off ;
-			{3'b1xx,`S_off}:   next1 = `S_ready ;
-			{3'b10x,`S_ready}:   next1 = `S_ready ;
-			{3'b11x,`S_ready}:   next1 = `S_run ;
-			{3'b1x0,`S_run}:   next1 = `S_run ;
-			{3'b1x1,`S_run}:   next1 = `S_run_error ;
-			{3'b1xx,`S_run_error}:   next1 = `S_ready ;
+		casex({on, in_selector, outOverflow,state})
+			{5'b0xxxx,`S_off}:   next1 = `S_off ;
+			{5'b1xxxx,`S_off}:   next1 = `S_ready ;
+			{5'b100xx,`S_ready}:   next1 = `S_ready ;
+			{5'b1x1xx,`S_ready}:   next1 = `S_run ;
+			{5'b1xxx0,`S_run}:   next1 = `S_run ;
+			{5'b1xxx1,`S_run}:   next1 = `S_run_error ;
+			{5'b1xxxx,`S_run_error}:   next1 = `S_ready ;
    	endcase
+		if(in_selector == 3'b001)
+			x = `S_ready;
+		else
+			x = next1;
 	end
 	
-	assign next = rst ? `S_ready : next1 ;
+
+	assign next = x ;
 	
 endmodule
 
