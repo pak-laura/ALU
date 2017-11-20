@@ -10,6 +10,7 @@ module TestBench;
 	//reg [7:0] previous;
 	reg [6:0] out_sel;	//which operation to do, comes out of the last mux
 	reg [7:0] num1, num2;
+	/////////////////////////////////////////
 	wire [7:0] out, final1, final2; //output value
 	wire [1:0] currState, nextState;
 	
@@ -106,7 +107,104 @@ module TestBench;
 			on = 1'b1; in_sel = 3'b010; num1 = 8'b00000100; num2 = 8'b00001000; out_sel = 7'b1000000;	//4 * 8
 			#20
 			
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b00001001; num2 = 8'b00001010; out_sel = 7'b0010000;	//9 + 10
+			#20
 			
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b11000001; num2 = 8'b10000110; out_sel = 7'b0100000;	//193 - 134 
+			#20
+			
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b00110010; num2 = 8'b00011001; out_sel = 7'b0010000;	// 50 + 25
+			#20
+			
+			
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b00110010; num2 = 8'b00011001; out_sel = 7'b0001000;	// 50 NOT 25
+			#20
+			
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b10000001; num2 = 8'b00000011; out_sel = 7'b0001000;	// 129 NOT 3 = NOT 129 = 126
+			#20
+			
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b00110010; num2 = 8'b00011001; out_sel = 7'b0000100;	// 50 XOR 25
+			#20
+			
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b00110010; num2 = 8'b00011001; out_sel = 7'b0000010;	// 50 OR 25
+			#20
+			
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b00110010; num2 = 8'b00011001; out_sel = 7'b0000001;	// 50 AND 25
+			#20
+			
+			
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b00011110; num2 = 8'b00011110; out_sel = 7'b0000001;	// 30 AND 30
+			#20
+			
+			#20
+			/*rst = 1;*/ 
+			on = 1'b1; in_sel = 3'b100; num1 = 8'b00011110; num2 = 8'b10000000; out_sel = 7'b0010000;	// 30 XOR 128 but reset is on
+			#20
+			
+			
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b11100000; num2 = 8'b01111111; out_sel = 7'b0100000;	// 224 - 127
+			#20
+			
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b01111000; num2 = 8'b00000001; out_sel = 7'b0000001;	// 120 AND 1
+			#20
+			
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b00001000; num2 = 8'b00001010; out_sel = 7'b0000100;	// 8 XOR 10
+			#20
+		
+		//	#20
+			/*rst = 0;*/ 
+		//	on = 1'b1; in_sel = 3'b010; num1 = 8'b01111000; num2 = 8'b00000001; out_sel = 7'b0000001;	// 120 AND 1
+		//	#20
+			
+		
+		//	#20
+			/*rst = 0;*/ 
+		//	on = 1'b1; in_sel = 3'b010; num1 = 8'b01111000; num2 = 8'b00000001; out_sel = 7'b0000001;	// 120 AND 1
+		//	#20
+			
+		/*	#20
+			/*rst = 0;*/ 
+		//	on = 1'b1; in_sel = 3'b010; num1 = 8'b01111000; num2 = 8'b00000001; out_sel = 7'b0000001;	// 120 AND 1
+		//	#20
+			
+		//	#20
+			/*rst = 0;*/ 
+		//	on = 1'b1; in_sel = 3'b010; num1 = 8'b01111000; num2 = 8'b00000001; out_sel = 7'b0000001;	// 120 AND 1
+		//	#20
+			
+		//	#20
+			/*rst = 0;*/ 
+		//	on = 1'b1; in_sel = 3'b010; num1 = 8'b01111000; num2 = 8'b00000001; out_sel = 7'b0000001;	// 120 AND 1
+		//	#20
+			
+		//	#20
+			/*rst = 0;*/ 
+		//	on = 1'b1; in_sel = 3'b010; num1 = 8'b01111000; num2 = 8'b00000001; out_sel = 7'b0000001;	// 120 AND 1
+		//	#20
 			
 			#20			//ending time MUST KEEP
 			
