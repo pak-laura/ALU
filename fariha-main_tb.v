@@ -27,7 +27,7 @@ module TestBench;
 	
 	initial begin
 		clk = 1; #10 clk = 0;
-		$display("	Num1	  	  Num2	        Operation|  Current State|     Output|	    Next State");
+		$display("	Num1	  	  Num2	            Operation|     Current State|     Output|	    Next State");
 		$display("------------------------------------------------------------------------------------------------");
 		
 		forever
@@ -40,9 +40,18 @@ module TestBench;
 					$display("    %b (%d)|    %b (%d)|   %b|    	 %b|	   %b (%d)| 	 %b",previous, previous, final2, final2, out_sel, currState, out, out, nextState);
 				end
 		*/		
-			
+
+				case (out_sel)
+				7'b1000000 : $display("    %b (%d)|    %b (%d)|   %b(Mult)|    	 %b|	   %b (%d)| 	 %b",final1, final1, final2, final2, out_sel, currState, out, out, nextState);
+				7'b0100000 : $display("    %b (%d)|    %b (%d)|   %b(Sub)|    	 %b|	   %b (%d)| 	 %b",final1, final1, final2, final2, out_sel, currState, out, out, nextState);
+				7'b0010000 : $display("    %b (%d)|    %b (%d)|   %b(Add)|    	 %b|	   %b (%d)| 	 %b",final1, final1, final2, final2, out_sel, currState, out, out, nextState);
+				7'b0001000 : $display("    %b (%d)|    %b (%d)|   %b(NOT)|    	 %b|	   %b (%d)| 	 %b",final1, final1, final2, final2, out_sel, currState, out, out, nextState);
+				7'b0000100 : $display("    %b (%d)|    %b (%d)|   %b(XOR)|    	 %b|	   %b (%d)| 	 %b",final1, final1, final2, final2, out_sel, currState, out, out, nextState);
+				7'b0000010 : $display("    %b (%d)|    %b (%d)|   %b(OR)|    	 %b|	   %b (%d)| 	 %b",final1, final1, final2, final2, out_sel, currState, out, out, nextState);
+				7'b0000001 : $display("    %b (%d)|    %b (%d)|   %b(AND)|    	 %b|	   %b (%d)| 	 %b",final1, final1, final2, final2, out_sel, currState, out, out, nextState);
+				endcase
 				
-					$display("    %b (%d)|    %b (%d)|   %b|    	 %b|	   %b (%d)| 	 %b",final1, final1, final2, final2, out_sel, currState, out, out, nextState);
+					//$display("    %b (%d)|    %b (%d)|   %b|    	 %b|	   %b (%d)| 	 %b",final1, final1, final2, final2, out_sel, currState, out, out, nextState);
 				
 			end
 		end
@@ -50,59 +59,64 @@ module TestBench;
 		
 		initial begin		//reset is part of in_selector
 			#20
-			/*rst=0;*/ on = 1'b1; in_sel = 3'b010; num1 = 8'b00000001; num2 = 8'b00000010; out_sel = 7'b1000000;	//1 x 2
-			//#15
+			/*rst=0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b00000001; num2 = 8'b00000010; out_sel = 7'b1000000;	//1 x 2
 			#20
 			
 			#20;
-			/*rst =1;*/ on = 1'b1; in_sel = 3'b010; num1 = 8'b00000011; num2 = 8'b00000010; out_sel = 7'b1000000;	//3 x 2
-			//#15;
+			/*rst =1;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b00000011; num2 = 8'b00000010; out_sel = 7'b1000000;	//3 x 2
 			#20;
 
 			#20;
+			/*rst =0*/
 			on = 1'b1; in_sel = 3'b010; num1 = 8'b01010111; num2 = 8'b00011010; out_sel = 7'b1000000;		//overflow
 			#20;
 			
 			#20;
 			on = 1'b1; in_sel = 3'b010; num1 = 8'b00000001; num2 = 8'b00000011; out_sel = 7'b1000000;		//1 x 3
 			#20;
+
 			
 			#20;
-			on = 1'b1; in_sel = 3'b001; num1 = 8'b00001000; num2 = 8'b00000100; out_sel = 7'b1000000;		//8 x 4
-			//this deals with persist but its so weird like i had 3 then it took that as 8->12 then output was just 12
-			#20;
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b00000010; num2 = 8'b00000100; out_sel = 7'b1000000;	//2 x 4
+			#20
+
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b00000010; num2 = 8'b00000100; out_sel = 7'b0100000;	//2 - 4
 			
-			#20;
-			/*rst = 0;*/ on = 1'b1; in_sel = 3'b010; num1 = 8'b00000010; num2 = 8'b00000100; out_sel = 7'b1000000;	//2 x 4
 			#20
 			
-			#20 
-			on = 1'b1; in_sel = 3'b001; num1 = 8'b00000010; num2 = 8'b00000100; out_sel = 7'b1000000;	//2 x 4
-			//this is persist and looks like persist output is being calculated before coming out and so display is already calculated num for num1
-			//and output			
-			#20;
 			#20
-			#20
-			/*#10 on = 1'b1; in_sel = 3'b010; num1 = 8'b00000010; num2 = 8'b00000100; out_sel = 7'b1000000;
-			#10;
-			#10 on = 1'b1; in_sel = 3'b010; num1 = 8'b00000010; num2 = 8'b00000100; out_sel = 7'b1000000;
-			#10;
+			/*rst = 1;*/ 
+			on = 1'b1; in_sel = 3'b100; num1 = 8'b00000010; num2 = 8'b00000100; out_sel = 7'b0100000;	//2 - 4
 			
-			/*#15 on = 1'b1; in_sel = 3'b010; num1 = 8'b00000111; num2 = 8'b00000010; out_sel = 7'b1000000;
-			#15 on = 1'b1; in_sel = 3'b010; num1 = 8'b01010111; num2 = 8'b00011010; out_sel = 7'b0100000;
-			#15 on = 1'b1; in_sel = 3'b010; num1 = 8'b01010111; num2 = 8'b00011010; out_sel = 7'b0010000;
-			#15 on = 1'b1; in_sel = 3'b010; num1 = 8'b01010111; num2 = 8'b00011010; out_sel = 7'b0001000;
-			#15 on = 1'b1; in_sel = 3'b010; num1 = 8'b01010111; num2 = 8'b00011010; out_sel = 7'b0000100;
-			#15 on = 1'b1; in_sel = 3'b010; num1 = 8'b01010111; num2 = 8'b00011010; out_sel = 7'b0000010;
-			#15 on = 1'b1; in_sel = 3'b010; num1 = 8'b01010111; num2 = 8'b00011010; out_sel = 7'b0000001;
-			#15*/
+			#20
+			
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b00000100; num2 = 8'b00001000; out_sel = 7'b0010000;	//4 + 8
+			
+			#20
+			
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b00000100; num2 = 8'b00001000; out_sel = 7'b1000000;	//4 * 8
+			#20
+			
+			
+			
+			#20			//ending time MUST KEEP
+			
 			
 			$stop;
 		
 		end
 		
 		initial begin
-			#300
+			#1000
 			$finish;
 		end
 endmodule
