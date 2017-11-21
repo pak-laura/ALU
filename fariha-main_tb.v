@@ -1,8 +1,6 @@
 //to get the last to output, need to have an extra #20 after that line
 //LAST THING
-	//cant figure out how to get the output of the previous, the thing actually being used to calculate, how to output that???
-	//need to test all other types of values using all the other funcoitns
-	//laura working on the fsm 
+
 module TestBench;
 
 	reg clk, on, rst;
@@ -10,7 +8,6 @@ module TestBench;
 	//reg [7:0] previous;
 	reg [6:0] out_sel;	//which operation to do, comes out of the last mux
 	reg [7:0] num1, num2;
-	/////////////////////////////////////////
 	wire [7:0] out, final1, final2; //output value
 	wire [1:0] currState, nextState;
 	
@@ -18,13 +15,6 @@ module TestBench;
 
 	main myMain(clk, on, /*rst,*/ in_sel, num1, num2, final1, final2, out_sel, out, currState, nextState);
 
-	/*always @* begin
-		if(in_sel == 1)
-			begin
-				assign previous = out;
-			end
-	end
-	*/
 	
 	initial begin
 		clk = 1; #10 clk = 0;
@@ -38,7 +28,7 @@ module TestBench;
 				#20
 		/*	if(in_sel == 1)
 				begin
-					$display("    %b (%d)|    %b (%d)|   %b|    	 %b|	   %b (%d)| 	 %b",previous, previous, final2, final2, out_sel, currState, out, out, nextState);
+					$display("    %b (%d)|    %b (%d)|   %b|    	     %b|	   %b (%d)| 	 %b",previous, previous, final2, final2, out_sel, currState, out, out, nextState);
 				end
 		*/		
 
@@ -100,7 +90,6 @@ module TestBench;
 				11'b00000011101 : $display("    %b (%d)|    %b (%d)|   %b(AND)|    	 %b(Running w/ error)|	   %b (%d)| 	 %b(Ready)",final1, final1, final2, final2, out_sel, currState, out, out, nextState);
 				endcase
 				
-					
 					//$display("    %b (%d)|    %b (%d)|   %b|    	 %b|	   %b (%d)| 	 %b",final1, final1, final2, final2, out_sel, currState, out, out, nextState);
 				
 			end
@@ -224,32 +213,175 @@ module TestBench;
 			on = 1'b1; in_sel = 3'b010; num1 = 8'b00001000; num2 = 8'b00001010; out_sel = 7'b0000100;	// 8 XOR 10
 			#20
 		
-		//	#20
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b00001100; num2 = 8'b00000111; out_sel = 7'b0000001;	// 12 AND 7
+			#20
+			
+		
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b00001011; num2 = 8'b00001010; out_sel = 7'b0000010;	// 11 OR 10
+			#20
+			
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b00011110; num2 = 8'b00000010; out_sel = 7'b0000001;	// 30 AND 2
+			#20
+			
+			
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b00011110; num2 = 8'b00000010; out_sel = 7'b1000000;	// 30 * 2
+			#20
+			
+			
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b11010111; num2 = 8'b00001001; out_sel = 7'b0001000;	// 215 NOT 9 = NOT 215
+			#20
+			
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b00111100; num2 = 8'b00111100; out_sel = 7'b0010000;	// 60 + 60
+			#20
+			
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b00011011; num2 = 8'b00000000; out_sel = 7'b0000010;	// 27 OR 0
+			#20
+			
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b00001101; num2 = 8'b00000111; out_sel = 7'b0100000;	// 13 - 7
+			#20
+			
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b00101111; num2 = 8'b01110011; out_sel = 7'b0000010;	// 47 OR 115
+			#20
+	//31 outputs
+
+	
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b01111000; num2 = 8'b01111000; out_sel = 7'b0000100;	// 120 XOR 120
+			#20
+		
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b01101110; num2 = 8'b00001010; out_sel = 7'b0010000;	// 110 + 10
+			#20
+		
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b10000000; num2 = 8'b01100100; out_sel = 7'b0100000;	// 128 - 100
+			#20
+		
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b11111110; num2 = 8'b00001010; out_sel = 7'b0001000;	// 254 NOT 10
+			#20
+		
+		
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b00001011; num2 = 8'b00000011; out_sel = 7'b1000000;	// 11 * 3
+			#20
+		
+		
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b01111000; num2 = 8'b00000111; out_sel = 7'b0000100;	// 144 XOR 7
+			#20
+//37 outputs
+
+
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b11100110; num2 = 8'b10010001; out_sel = 7'b0000100;	// 230 XOR 145
+			#20
+		
+		
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b01110111; num2 = 8'b00010011; out_sel = 7'b0000001;	// 119 AND 19
+			#20
+		
+		
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b01000001; num2 = 8'b00001000; out_sel = 7'b0000100;	// 65 XOR 8
+			#20
+//40 outputs		
+		
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b11000111; num2 = 8'b01100100; out_sel = 7'b0100000;	// 199 - 100
+			#20
+			
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b100; num1 = 8'b11110111; num2 = 8'b01100100; out_sel = 7'b0100000;	// 247 - 100 but reset is on
+			#20
+		
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b10000010; num2 = 8'b00001010; out_sel = 7'b0000001;	// 130 AND 10
+			#20
+		
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b00001110; num2 = 8'b01111000; out_sel = 7'b0000100;	// 14 XOR 120
+			#20
+		
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b11011101; num2 = 8'b01100100; out_sel = 7'b0000001;	// 221 AND 100
+			#20
+		
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b00010110; num2 = 8'b01100100; out_sel = 7'b0000010;	// 22 OR 100
+			#20
+
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b00010110; num2 = 8'b01100100; out_sel = 7'b0000001;	// 22 AND 100
+			#20
+		
+			#20
+			/*rst = 0;*/ 
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b00010110; num2 = 8'b01100100; out_sel = 7'b0000100;	// 22 XOR 100
+			#20
+//48 outputs		
+		
+			//	#20
 			/*rst = 0;*/ 
 		//	on = 1'b1; in_sel = 3'b010; num1 = 8'b01111000; num2 = 8'b00000001; out_sel = 7'b0000001;	// 120 AND 1
 		//	#20
-			
+		
+			//	#20
+			/*rst = 0;*/ 
+		//	on = 1'b1; in_sel = 3'b010; num1 = 8'b01111000; num2 = 8'b00000001; out_sel = 7'b0000001;	// 120 AND 1
+		//	#20
 		
 		//	#20
 			/*rst = 0;*/ 
 		//	on = 1'b1; in_sel = 3'b010; num1 = 8'b01111000; num2 = 8'b00000001; out_sel = 7'b0000001;	// 120 AND 1
 		//	#20
-			
-		/*	#20
-			/*rst = 0;*/ 
-		//	on = 1'b1; in_sel = 3'b010; num1 = 8'b01111000; num2 = 8'b00000001; out_sel = 7'b0000001;	// 120 AND 1
-		//	#20
-			
+		
 		//	#20
 			/*rst = 0;*/ 
 		//	on = 1'b1; in_sel = 3'b010; num1 = 8'b01111000; num2 = 8'b00000001; out_sel = 7'b0000001;	// 120 AND 1
 		//	#20
-			
+		
 		//	#20
 			/*rst = 0;*/ 
 		//	on = 1'b1; in_sel = 3'b010; num1 = 8'b01111000; num2 = 8'b00000001; out_sel = 7'b0000001;	// 120 AND 1
 		//	#20
-			
+		
+		
 		//	#20
 			/*rst = 0;*/ 
 		//	on = 1'b1; in_sel = 3'b010; num1 = 8'b01111000; num2 = 8'b00000001; out_sel = 7'b0000001;	// 120 AND 1
@@ -263,7 +395,7 @@ module TestBench;
 		end
 		
 		initial begin
-			#1000
+			#2420
 			$finish;
 		end
 endmodule
