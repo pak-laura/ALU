@@ -24,13 +24,12 @@ module main(clk, on, /*rst,*/ in_selector, num1, num2, /*final1, final2,*/outM1,
 	wire [7:0] outNot;
 	wire [7:0] outXor;
 	wire [7:0] outMult;
-	wire outOverflow, subOverflow;
+	wire outOverflow;
 	wire carryOutToNowhere; 
 	wire [7:0] sum;
 	wire [7:0] diff;
  	reg  [1:0] next1  ;      // next state without reset
 	reg [1:0] x; //for reset
-	reg errMult, errSub;
 	
 
 	MuxFF #(8) mux_1(outputVal, num1, 8'b00000000, in_selector, outM1); //changed from 2nd final to num
@@ -46,7 +45,7 @@ module main(clk, on, /*rst,*/ in_selector, num1, num2, /*final1, final2,*/outM1,
 	
 	Mult multed(outDFF1, outDFF2, outOverflow, outMult);
 	add myAdd(outDFF1, outDFF2, carryOutToNowhere, sum);
-	sub mySub(outDFF1, outDFF2, diff, subOverflow);
+	sub mySub(outDFF1, outDFF2, diff);
 	
 	MuxOut output_mux(outAnd, outOr, outXor, outNot, sum, diff, outMult, out_selector, outputVal);
 	
@@ -54,24 +53,14 @@ module main(clk, on, /*rst,*/ in_selector, num1, num2, /*final1, final2,*/outM1,
 	
 
 	always @(*) begin
-		if(out_selector == 7'b1000000)
-			errMult = outOverflow;
-		else
-			errMult = 0;
-		if(out_selector == 7'b0100000)
-			errSub = subOverflow;
-		else
-			errSub = 0;
-		
-		casex({on, in_selector, errMult,errSub, state})
-			{6'b0xxxxx,`S_off}:   next1 = `S_off ;
-			{6'b1xxxxx,`S_off}:   next1 = `S_ready ;
-			{6'b100xxx,`S_ready}:   next1 = `S_ready ;
-			{6'b1x1xxx,`S_ready}:   next1 = `S_run ;
-			{6'b1xxx00,`S_run}:   next1 = `S_run ;
-			{6'b1xxxx1,`S_run}:   next1 = `S_run_error ;
-			{6'b1xxx1x,`S_run}:   next1 = `S_run_error ;
-			{6'b1xxxxx,`S_run_error}:   next1 = `S_ready ;
+		casex({on, in_selector, outOverflow,state})
+			{5'b0xxxx,`S_off}:   next1 = `S_off ;
+			{5'b1xxxx,`S_off}:   next1 = `S_ready ;
+			{5'b100xx,`S_ready}:   next1 = `S_ready ;
+			{5'b1x1xx,`S_ready}:   next1 = `S_run ;
+			{5'b1xxx0,`S_run}:   next1 = `S_run ;
+			{5'b1xxx1,`S_run}:   next1 = `S_run_error ;
+			{5'b1xxxx,`S_run_error}:   next1 = `S_ready ;
    	endcase
 		if(in_selector == 3'b001)
 			x = `S_ready;
@@ -83,10 +72,3 @@ module main(clk, on, /*rst,*/ in_selector, num1, num2, /*final1, final2,*/outM1,
 	assign next = x ;
 	
 endmodule
-
-
-
-
-
-
-
