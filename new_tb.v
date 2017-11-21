@@ -110,11 +110,6 @@ module TestBench;
 			/*rst = 0;*/ 
 			on = 1'b1; in_sel = 3'b010; num1 = 8'b00000010; num2 = 8'b00000100; out_sel = 7'b1000000;	//2 x 4
 			#20
-
-//			#20
-			/*rst = 0;*/ 
-//			on = 1'b1; in_sel = 3'b010; num1 = 8'b00000010; num2 = 8'b00000100; out_sel = 7'b0100000;	//2 - 4
-//			#20
 			
 			
 			
@@ -134,10 +129,6 @@ module TestBench;
 			on = 1'b1; in_sel = 3'b010; num1 = 8'b00001001; num2 = 8'b00001010; out_sel = 7'b0010000;	//9 + 10
 			#20
 			
-//			#20
-			/*rst = 0;*/ 
-//			on = 1'b1; in_sel = 3'b010; num1 = 8'b11000001; num2 = 8'b10000110; out_sel = 7'b0100000;	//193 - 134 
-//			#20
 			
 			#20
 			/*rst = 0;*/ 
@@ -273,11 +264,6 @@ module TestBench;
 			on = 1'b1; in_sel = 3'b010; num1 = 8'b11111110; num2 = 8'b00001010; out_sel = 7'b0001000;	// 254 NOT 10
 			#20
 		
-		
-//			#20
-			/*rst = 0;*/ 
-//			on = 1'b1; in_sel = 3'b010; num1 = 8'b00001011; num2 = 8'b00000011; out_sel = 7'b1000000;	// 11 * 3
-//			#20
 			
 			#20
 			/*rst = 0;*/ 
@@ -383,20 +369,10 @@ module TestBench;
 			on = 1'b1; in_sel = 3'b010; num1 = 8'b01001000; num2 = 8'b00001101; out_sel = 7'b0000001;	// 72 AND 13
 			#20
 		
-//			#20
-			/*rst = 0;*/ 
-//			on = 1'b1; in_sel = 3'b010; num1 = 8'b00000100; num2 = 8'b00001000; out_sel = 7'b1000000;	// 4 * 8
-//			#20
-		
 			#20
 			/*rst = 0;*/ 
 			on = 1'b1; in_sel = 3'b010; num1 = 8'b10010001; num2 = 8'b11111010; out_sel = 7'b0001000;	// 145 NOT 250
 			#20
-		
-//			#20
-			/*rst = 0;*/ 
-//			on = 1'b1; in_sel = 3'b010; num1 = 8'b01000001; num2 = 8'b00100011; out_sel = 7'b0100000;	// 65 - 35
-//			#20
 		
 			#20
 			/*rst = 0;*/ 
@@ -426,21 +402,7 @@ module TestBench;
 			on = 1'b1; in_sel = 3'b010; num1 = 8'b10000010; num2 = 8'b11011100; out_sel = 7'b0100000;	// 130 - 220 overflow ERROR
 			#20
 			#20
-//58 outputs				
-			
-			//#20;
-			/*rst =0*/
-			//on = 1'b1; in_sel = 3'b010; num1 = 8'b11010111; num2 = 8'b01011010; out_sel = 7'b1000000;		//215 * 90 overflow ERROR
-			//#20;
-			
-			
-	//		#20
-	//		#20;
-			/*rst =0*/
-	//		on = 1'b1; in_sel = 3'b010; num1 = 8'b01010111; num2 = 8'b00011010; out_sel = 7'b1000000;		//overflow
-	//		#20;
-//61 outputs
-	//		#20
+
 			
 			#20			//ending time
 			
