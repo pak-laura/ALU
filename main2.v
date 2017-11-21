@@ -71,7 +71,10 @@ module main(clk, on, /*rst,*/ in_selector, num1, num2, /*final1, final2,*/outM1,
 			{6'b1xxx00,`S_run}:   next1 = `S_run ;
 			{6'b1xxxx1,`S_run}:   next1 = `S_run_error ;
 			{6'b1xxx1x,`S_run}:   next1 = `S_run_error ;
-			{6'b1xxxxx,`S_run_error}:   next1 = `S_ready ;
+			/*{6'b1xxxxx,`S_run_error}:   next1 = `S_ready ;*/
+			{6'b1xxx00,`S_run_error}:   next1 = `S_run ;
+			{6'b1xxx1x,`S_run_error}:   next1 = `S_run_error ;
+			{6'b1xxxx1,`S_run_error}:   next1 = `S_run_error ;
    	endcase
 		if(in_selector == 3'b001)
 			x = `S_ready;
