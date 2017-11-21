@@ -116,10 +116,6 @@ module TestBench;
 //			on = 1'b1; in_sel = 3'b010; num1 = 8'b00000010; num2 = 8'b00000100; out_sel = 7'b0100000;	//2 - 4
 //			#20
 			
-//			#20
-			/*rst = 1;*/ 
-//			on = 1'b1; in_sel = 3'b100; num1 = 8'b00000010; num2 = 8'b00000100; out_sel = 7'b0100000;	//2 - 4 but reset is on
-//			#20
 			
 			
 			#20
@@ -189,7 +185,7 @@ module TestBench;
 			
 			#20
 			/*rst = 1;*/ 
-			on = 1'b1; in_sel = 3'b100; num1 = 8'b00011110; num2 = 8'b10000000; out_sel = 7'b0010000;	// 30 XOR 128 but reset is on
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b00011110; num2 = 8'b00011001; out_sel = 7'b0010000;	// 30 + 25
 			#20
 			
 			
@@ -313,7 +309,7 @@ module TestBench;
 			
 			#20
 			/*rst = 0;*/ 
-			on = 1'b1; in_sel = 3'b100; num1 = 8'b11110111; num2 = 8'b01100100; out_sel = 7'b0100000;	// 247 - 100 but reset is on
+			on = 1'b1; in_sel = 3'b010; num1 = 8'b11110111; num2 = 8'b11001000; out_sel = 7'b0100000;	// 247 - 200
 			#20
 		
 			#20
